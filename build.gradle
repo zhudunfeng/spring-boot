@@ -25,6 +25,9 @@ allprojects {
 	group "org.springframework.boot"
 
 	repositories {
+		maven { url 'file:///D:/repository'}
+		mavenLocal()
+		maven { name "Alibaba" ; url "https://maven.aliyun.com/repository/public" }
 		mavenCentral()
 		if (version.contains('-')) {
 			maven { url "https://repo.spring.io/milestone" }

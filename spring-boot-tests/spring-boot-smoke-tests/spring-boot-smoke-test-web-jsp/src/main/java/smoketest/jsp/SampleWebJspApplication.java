@@ -20,8 +20,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.io.Resource;
 
-@SpringBootApplication
+import java.util.Arrays;
+
+@SpringBootApplication()
 public class SampleWebJspApplication extends SpringBootServletInitializer {
 
 	@Override
@@ -30,7 +35,13 @@ public class SampleWebJspApplication extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleWebJspApplication.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(SampleWebJspApplication.class, args);
+		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+		System.out.println(Arrays.asList(beanDefinitionNames).contains("welcomeController"));
+		System.out.println(Arrays.asList(beanDefinitionNames).contains("orderService"));
+		Resource resource = applicationContext.getResource("https://www.baidu.com");
+		System.out.println(resource);
+
 	}
 
 }

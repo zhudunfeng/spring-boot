@@ -34,6 +34,7 @@ import org.springframework.core.env.StandardEnvironment;
  * @author Brian Clozel
  * @author Nguyen Sach
  * @since 1.3.0
+ * 云平台类型枚举类
  */
 public enum CloudPlatform {
 

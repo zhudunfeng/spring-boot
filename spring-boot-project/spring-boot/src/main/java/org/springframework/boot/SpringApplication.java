@@ -326,10 +326,13 @@ public class SpringApplication {
 	 */
 	public ConfigurableApplicationContext run(String... args) {
 		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
+		stopWatch.start();//记录开始时间
 		DefaultBootstrapContext bootstrapContext = createBootstrapContext();
 		ConfigurableApplicationContext context = null;
 		configureHeadlessProperty();
+
+		//从spring.factories中获取SpringApplicationRunListener对象
+		//默认会拿到一个EventPublishingRunListener,他会在启动过程中的各个阶段发布对应的事件
 		SpringApplicationRunListeners listeners = getRunListeners(args);
 		listeners.starting(bootstrapContext, this.mainApplicationClass);
 		try {
@@ -1351,7 +1354,7 @@ public class SpringApplication {
 	/**
 	 * Static helper that can be used to run a {@link SpringApplication} from the
 	 * specified source using default settings.
-	 * @param primarySource the primary source to load
+	 * @param primarySource the primary source to load  可以传入多个配置扫描类
 	 * @param args the application arguments (usually passed from a Java main method)
 	 * @return the running {@link ApplicationContext}
 	 */
