@@ -1,0 +1,23 @@
+
+1. 生成一个SpringApplication的对象
+    1. webApplicationType = 推测web应用类型(NONE、REACTIVE、SERVLET)
+    2. 从spring.factories中获取BootstrapRegistryInitializer对象
+    3. initializers = 从spring.factories中获取ApplicationContextInitializer对象
+    4. listeners = 从spring.factories中获取ApplicationListener对象
+
+
+
+
+1. SpringApplication对象.run()
+    1. 获取SpringApplicationRunListener --> EventPublishingRunListener
+    2. 执行SpringApplicationRunListener.starting()
+    3. 创建一个Spring容器
+    4. 调用ApplicationContextInitializer对象的initialize --->初始化Spring容器
+    5. 执行SpringApplicationRunListener.contextPrepared() 发布准备完成事件
+    6. 把传给run方法的配置类注册成一个Bean【SpringApplication:474】
+    7. 执行SpringApplicationRunListener.contextLoaded() 发布主配置类加载完成事件
+    8. 刷新Spring容器，会解析配置类、扫描、启动WebServer【启动Tomcat/Jetty/Undertow服务器】
+    （解析配置类的同时，AutoConfigurationImportSelector，DeferredImportSelector）
+    9. 执行SpringApplicationRunListener.started() 发布启动完成事件
+    10.执行SpringApplicationRunListener.running(context) SpringBoot完全启动成功，处于运行中
+
