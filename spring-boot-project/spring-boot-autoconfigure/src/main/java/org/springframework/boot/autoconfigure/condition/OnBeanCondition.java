@@ -150,7 +150,7 @@ class OnBeanCondition extends FilteringSpringBootCondition implements Configurat
 						.items(Style.QUOTE, allBeans);
 			}
 		}
-		if (metadata.isAnnotated(ConditionalOnMissingBean.class.getName())) { //获取ConditionalOnMissingBean注解的元素
+		if (metadata.isAnnotated(ConditionalOnMissingBean.class.getName())) { // 获取ConditionalOnMissingBean注解的元素
 			Spec<ConditionalOnMissingBean> spec = new Spec<>(context, metadata, annotations,
 					ConditionalOnMissingBean.class);
 			MatchResult matchResult = getMatchingBeans(context, spec);
@@ -431,9 +431,9 @@ class OnBeanCondition extends FilteringSpringBootCondition implements Configurat
 			this.strategy = annotation.getValue("search", SearchStrategy.class).orElse(null);
 			Set<String> types = extractTypes(attributes);
 			BeanTypeDeductionException deductionException = null;
-			if (types.isEmpty() && this.names.isEmpty()) {//既没有指定类型又没有指定名字
+			if (types.isEmpty() && this.names.isEmpty()) {// 既没有指定类型又没有指定名字
 				try {
-					types = deducedBeanType(context, metadata);//推断类型
+					types = deducedBeanType(context, metadata);// 推断类型
 				}
 				catch (BeanTypeDeductionException ex) {
 					deductionException = ex;
@@ -517,7 +517,7 @@ class OnBeanCondition extends FilteringSpringBootCondition implements Configurat
 
 		private Set<String> deducedBeanTypeForBeanMethod(ConditionContext context, MethodMetadata metadata) {
 			try {
-				Class<?> returnType = getReturnType(context, metadata);//方法的返回值类型作为type的默认值
+				Class<?> returnType = getReturnType(context, metadata);// 方法的返回值类型作为type的默认值
 				return Collections.singleton(returnType.getName());
 			}
 			catch (Throwable ex) {

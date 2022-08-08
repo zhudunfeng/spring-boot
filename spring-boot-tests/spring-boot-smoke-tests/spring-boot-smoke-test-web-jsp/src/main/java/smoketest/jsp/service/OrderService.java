@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 public class OrderService {
 
-	public void hello(){
+	public void hello() {
 		System.out.println("hello");
 	}
+
 }

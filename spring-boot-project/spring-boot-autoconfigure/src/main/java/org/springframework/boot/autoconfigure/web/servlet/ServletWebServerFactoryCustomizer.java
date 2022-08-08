@@ -58,6 +58,7 @@ public class ServletWebServerFactoryCustomizer
 		return 0;
 	}
 
+	// 此方法会在WebServer自动配置过程中被WebServerFactoryCustomizerBeanPostProcessor调用
 	@Override
 	public void customize(ConfigurableServletWebServerFactory factory) {
 		PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();

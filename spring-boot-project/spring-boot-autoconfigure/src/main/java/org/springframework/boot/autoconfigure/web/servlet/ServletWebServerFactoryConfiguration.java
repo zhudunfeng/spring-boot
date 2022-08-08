@@ -64,9 +64,11 @@ import org.springframework.context.annotation.Configuration;
 class ServletWebServerFactoryConfiguration {
 
 	@Configuration(proxyBeanMethods = false)
-	@ConditionalOnClass({ Servlet.class, Tomcat.class, UpgradeProtocol.class })//有这三个类会加载下面的类
+	@ConditionalOnClass({ Servlet.class, Tomcat.class, UpgradeProtocol.class }) // 有这三个类会加载下面的类
 	@ConditionalOnMissingBean(value = ServletWebServerFactory.class, search = SearchStrategy.CURRENT)
-	static class EmbeddedTomcat {//静态内部类，早生晚死
+	static class EmbeddedTomcat {
+
+		// 静态内部类，早生晚死
 
 		@Bean
 		TomcatServletWebServerFactory tomcatServletWebServerFactory(
@@ -75,7 +77,7 @@ class ServletWebServerFactoryConfiguration {
 				ObjectProvider<TomcatProtocolHandlerCustomizer<?>> protocolHandlerCustomizers) {
 			TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
 
-			//orderedStream()调用时会去Spring容器中找到TomcatConnectorCustomizer类型的Bean，默认是没有的的，程序员可自定义
+			// orderedStream()调用时会去Spring容器中找到TomcatConnectorCustomizer类型的Bean，默认是没有的的，程序员可自定义
 			factory.getTomcatConnectorCustomizers()
 					.addAll(connectorCustomizers.orderedStream().collect(Collectors.toList()));
 			factory.getTomcatContextCustomizers()

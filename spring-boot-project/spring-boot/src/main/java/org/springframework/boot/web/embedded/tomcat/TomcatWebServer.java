@@ -118,7 +118,7 @@ public class TomcatWebServer implements WebServer {
 						removeServiceConnectors();
 					}
 				});
-				//启动tomcat
+				// 启动tomcat
 				// Start the server to trigger initialization listeners
 				this.tomcat.start();
 
@@ -132,6 +132,7 @@ public class TomcatWebServer implements WebServer {
 					// Naming is not enabled. Continue
 				}
 
+				//启动一个线程维持tomcat启动，主线程继续运行其他代码
 				// Unlike Jetty, all Tomcat threads are daemon threads. We create a
 				// blocking non-daemon to stop immediate shutdown
 				startDaemonAwaitThread();

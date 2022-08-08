@@ -69,8 +69,9 @@ import org.springframework.web.filter.ForwardedHeaderFilter;
 		ServletWebServerFactoryConfiguration.EmbeddedTomcat.class,
 		ServletWebServerFactoryConfiguration.EmbeddedJetty.class,
 		ServletWebServerFactoryConfiguration.EmbeddedUndertow.class })
-public class ServletWebServerFactoryAutoConfiguration {/*此类会默认配置到spring.factories中*/
+public class ServletWebServerFactoryAutoConfiguration {/* 此类会默认配置到spring.factories中 */
 
+	// 当前Bean会加载用户properties中的自定义配置
 	@Bean
 	public ServletWebServerFactoryCustomizer servletWebServerFactoryCustomizer(ServerProperties serverProperties,
 			ObjectProvider<WebListenerRegistrar> webListenerRegistrars) {
@@ -136,6 +137,7 @@ public class ServletWebServerFactoryAutoConfiguration {/*此类会默认配置�
 			if (this.beanFactory == null) {
 				return;
 			}
+			// 往spring容器中注册一个WebServerFactoryCustomizerBeanPostProcessor
 			registerSyntheticBeanIfMissing(registry, "webServerFactoryCustomizerBeanPostProcessor",
 					WebServerFactoryCustomizerBeanPostProcessor.class,
 					WebServerFactoryCustomizerBeanPostProcessor::new);

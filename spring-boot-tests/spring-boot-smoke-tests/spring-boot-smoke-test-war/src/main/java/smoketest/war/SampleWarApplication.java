@@ -35,7 +35,7 @@ public class SampleWarApplication extends SpringBootServletInitializer {
 
 	}
 
-	public  void test(){
+	public void test() {
 		Package aPackage = this.getClass().getPackage();
 		System.out.println(aPackage);
 		URL resource = this.getClass().getClassLoader().getResource("");

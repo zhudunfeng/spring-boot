@@ -27,7 +27,8 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
  * and should declare a public constructor that accepts a {@link SpringApplication}
  * instance and a {@code String[]} of arguments. A new
  * {@link SpringApplicationRunListener} instance will be created for each run.
- *	启动过程中SpringApplication各个过程状态的监听
+ * 启动过程中SpringApplication各个过程状态的监听
+ *
  * @author Phillip Webb
  * @author Dave Syer
  * @author Andy Wilkinson

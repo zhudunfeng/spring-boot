@@ -64,9 +64,12 @@ public class WebServerFactoryCustomizerBeanPostProcessor implements BeanPostProc
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
-
+	// BeanPostProcessor的postProcessBeforeInitialization在SpringFramework初始化前被调用
 	@SuppressWarnings("unchecked")
 	private void postProcessBeforeInitialization(WebServerFactory webServerFactory) {
+		// 获取WebServerFactoryCustomizer对WebServerFactory进行自定义，默认会拿到5个，其中包括ServletWebServerFactoryCustomizer
+		//TomcatWebSocketServletWebServerCustomizer、TomcatServletWebServerFactoryCustomizer、TomcatWebServerFactoryCustomizer
+		//LocaleCharsetMappingsCustomizer
 		LambdaSafe.callbacks(WebServerFactoryCustomizer.class, getCustomizers(), webServerFactory)
 				.withLogger(WebServerFactoryCustomizerBeanPostProcessor.class)
 				.invoke((customizer) -> customizer.customize(webServerFactory));
