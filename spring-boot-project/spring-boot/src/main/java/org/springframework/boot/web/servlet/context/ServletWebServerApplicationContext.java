@@ -157,6 +157,7 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 	protected void onRefresh() {
 		super.onRefresh();
 		try {
+			//启动Tomcat
 			createWebServer();
 		}
 		catch (Throwable ex) {
@@ -176,11 +177,15 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 		WebServer webServer = this.webServer;
 		ServletContext servletContext = getServletContext();
 		if (webServer == null && servletContext == null) {
+			//StartupStep是支持jdk的新特性
 			StartupStep createWebServer = this.getApplicationStartup().start("spring.boot.webserver.create");
+
 			ServletWebServerFactory factory = getWebServerFactory();
 			createWebServer.tag("factory", factory.getClass().toString());
+
 			this.webServer = factory.getWebServer(getSelfInitializer());
 			createWebServer.end();
+			//向spring容器中添加单例bean
 			getBeanFactory().registerSingleton("webServerGracefulShutdown",
 					new WebServerGracefulShutdownLifecycle(this.webServer));
 			getBeanFactory().registerSingleton("webServerStartStop",
@@ -206,6 +211,7 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 	protected ServletWebServerFactory getWebServerFactory() {
 		// Use bean names so that we don't consider the hierarchy
 		String[] beanNames = getBeanFactory().getBeanNamesForType(ServletWebServerFactory.class);
+		//控制只能存在一个web容器
 		if (beanNames.length == 0) {
 			throw new ApplicationContextException("Unable to start ServletWebServerApplicationContext due to missing "
 					+ "ServletWebServerFactory bean.");

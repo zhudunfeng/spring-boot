@@ -178,7 +178,7 @@ public class TomcatServletWebServerFactory extends AbstractServletWebServerFacto
 		}
 		return lifecycleListeners;
 	}
-
+	/*获取Tomcat*/
 	@Override
 	public WebServer getWebServer(ServletContextInitializer... initializers) {
 		if (this.disableMBeanRegistry) {
