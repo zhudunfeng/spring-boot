@@ -43,6 +43,7 @@ import org.springframework.util.StringUtils;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class OnClassCondition extends FilteringSpringBootCondition {
 
+	/*  自动配置类符合条件去重之后的类在来此处判断是否符合条件*/
 	@Override
 	protected final ConditionOutcome[] getOutcomes(String[] autoConfigurationClasses,
 			AutoConfigurationMetadata autoConfigurationMetadata) {
@@ -58,7 +59,7 @@ class OnClassCondition extends FilteringSpringBootCondition {
 			return outcomesResolver.resolveOutcomes();
 		}
 	}
-
+	/* 多线程并行解析类上是否添加@ConditionalOnClass */
 	private ConditionOutcome[] resolveOutcomesThreaded(String[] autoConfigurationClasses,
 			AutoConfigurationMetadata autoConfigurationMetadata) {
 		int split = autoConfigurationClasses.length / 2;
@@ -86,6 +87,7 @@ class OnClassCondition extends FilteringSpringBootCondition {
 		}
 	}
 
+	/* @ConditionalOnClass会使用此方法 */
 	@Override
 	public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
 		ClassLoader classLoader = context.getClassLoader();

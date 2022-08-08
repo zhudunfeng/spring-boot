@@ -37,11 +37,15 @@ public class SampleWebJspApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(SampleWebJspApplication.class, args);
 		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-		System.out.println(Arrays.asList(beanDefinitionNames).contains("welcomeController"));
-		System.out.println(Arrays.asList(beanDefinitionNames).contains("orderService"));
+		System.out.println(isContainBean("welcomeController",beanDefinitionNames));
+		System.out.println(isContainBean("orderService",beanDefinitionNames));
 		Resource resource = applicationContext.getResource("https://www.baidu.com");
 		System.out.println(resource);
 
+	}
+
+	public static boolean isContainBean(String beanName,String... beanDefinitionNames){
+		return Arrays.asList(beanDefinitionNames).contains(beanName);
 	}
 
 }

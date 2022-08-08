@@ -48,6 +48,7 @@ abstract class FilteringSpringBootCondition extends SpringBootCondition
 		ConditionEvaluationReport report = ConditionEvaluationReport.find(this.beanFactory);
 		ConditionOutcome[] outcomes = getOutcomes(autoConfigurationClasses, autoConfigurationMetadata);
 		boolean[] match = new boolean[outcomes.length];
+		// 会把不符合条件的AutoConfiguration打印日志
 		for (int i = 0; i < outcomes.length; i++) {
 			match[i] = (outcomes[i] == null || outcomes[i].isMatch());
 			if (!match[i] && outcomes[i] != null) {

@@ -19,5 +19,6 @@
     8. 刷新Spring容器，会解析配置类、扫描、启动WebServer【启动Tomcat/Jetty/Undertow服务器】
     （解析配置类的同时，AutoConfigurationImportSelector，DeferredImportSelector）
     9. 执行SpringApplicationRunListener.started() 发布启动完成事件
-    10.执行SpringApplicationRunListener.running(context) SpringBoot完全启动成功，处于运行中
+    10. callRunners,运行ApplicationRunner/CommandLineRunner.run()
+    11.执行SpringApplicationRunListener.running(context) SpringBoot完全启动成功，处于运行中
 

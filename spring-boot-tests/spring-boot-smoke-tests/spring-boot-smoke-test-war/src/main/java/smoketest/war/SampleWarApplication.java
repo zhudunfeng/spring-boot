@@ -19,14 +19,27 @@ package smoketest.war;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
+
+import java.net.URL;
 
 @SpringBootApplication
 @PropertySource("WEB-INF/custom.properties")
 public class SampleWarApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleWarApplication.class, args);
+		ConfigurableApplicationContext run = SpringApplication.run(SampleWarApplication.class, args);
+		SampleWarApplication sampleWarApplication = (SampleWarApplication) run.getBean("sampleWarApplication");
+		sampleWarApplication.test();
+
+	}
+
+	public  void test(){
+		Package aPackage = this.getClass().getPackage();
+		System.out.println(aPackage);
+		URL resource = this.getClass().getClassLoader().getResource("");
+		System.out.println(resource);
 	}
 
 }
