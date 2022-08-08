@@ -8,6 +8,7 @@
 
 
 
+
 1. SpringApplication对象.run()
     1. 获取SpringApplicationRunListener --> EventPublishingRunListener
     2. 执行SpringApplicationRunListener.starting()

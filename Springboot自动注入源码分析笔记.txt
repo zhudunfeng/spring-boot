@@ -1,4 +1,5 @@
 1. 先扫描---->得到新的配置类--->自己定义的配置类
 
+
 2. AutoConfigurationImportSelector.selectImports() 得到自动配置类【从spring.factories获取自动配置类，过滤、去重】--
 ->解析【使用Condition相关注解，判断自动配置类是否符合条件，对应替换用户自定义配置】
